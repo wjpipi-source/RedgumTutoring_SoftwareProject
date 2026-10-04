@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-section">
+    <div class="page-header">
+        <div>
+            <p class="section-label">Students</p>
+            <h3 class="section-heading">Edit student</h3>
+        </div>
+    </div>
+
+    <div class="form-panel">
+        <form class="needs-validation" novalidate>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label" for="student-name">Student name</label>
+                    <input type="text" class="form-control" id="student-name" value="{{ student.name if student else 'Student name' }}" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="year-level">Year level</label>
+                    <select class="form-select" id="year-level" required>
+                        <option selected>{{ student.year_level if student else 'Year 1' }}</option>
+                        <option>Year 1</option>
+                        <option>Year 2</option>
+                        <option>Year 3</option>
+                        <option>Year 4</option>
+                        <option>Year 5+</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label class="form-label" for="family-contact">Family contact</label>
+                    <input type="text" class="form-control" id="family-contact" value="{{ student.family_contact if student else '' }}" required>
+                </div>
+                <div class="col-12">
+                    <label class="form-label" for="status">Status</label>
+                    <select class="form-select" id="status">
+                        <option selected>Active</option>
+                        <option>Inactive</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a href="{{ url_for('students') }}" class="btn btn-outline-secondary">Back</a>
+                <button type="submit" class="btn btn-primary">Update student</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

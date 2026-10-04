@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-section">
+    <div class="page-header">
+        <div>
+            <p class="section-label">Tutors</p>
+            <h3 class="section-heading">Add a new tutor</h3>
+        </div>
+    </div>
+
+    <div class="form-panel">
+        <form class="needs-validation" novalidate>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label" for="tutor-name">Tutor name</label>
+                    <input type="text" class="form-control" id="tutor-name" placeholder="Full name" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="subjects">Subjects</label>
+                    <input type="text" class="form-control" id="subjects" placeholder="e.g. Mathematics, Biology" required>
+                </div>
+                <div class="col-12">
+                    <label class="form-label" for="specialisation">Specialisation</label>
+                    <textarea class="form-control" id="specialisation" rows="4" placeholder="Teaching expertise and relevant notes"></textarea>
+                </div>
+                <div class="col-12">
+                    <label class="form-label" for="tutor-status">Status</label>
+                    <select class="form-select" id="tutor-status">
+                        <option selected>Active</option>
+                        <option>Inactive</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a href="{{ url_for('tutors') }}" class="btn btn-outline-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save tutor</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-section">
+    <div class="page-header">
+        <div>
+            <p class="section-label">Tutor records</p>
+            <h3 class="section-heading">Manage tutors</h3>
+        </div>
+        <a href="{{ url_for('add_tutor') }}" class="btn btn-primary">
+            <i class="fa-solid fa-user-plus"></i>
+            Add Tutor
+        </a>
+    </div>
+
+    <div class="toolbar row g-3 align-items-center mb-4">
+        <div class="col-md-8">
+            <div class="input-group search-box">
+                <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+                <input type="search" class="form-control" placeholder="Search tutors...">
+            </div>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <button class="btn btn-outline-secondary">Filters</button>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Tutor Name</th>
+                        <th>Subjects</th>
+                        <th>Availability</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tutor in tutors %}
+                    <tr>
+                        <td>{{ tutor.name }}</td>
+                        <td>
+                            {% for subject in tutor.subjects %}
+                            <span class="chip">{{ subject }}</span>
+                            {% endfor %}
+                        </td>
+                        <td>{{ tutor.availability }}</td>
+                        <td>
+                            {% if tutor.status == 'Active' %}
+                            <span class="status-badge status-booked">{{ tutor.status }}</span>
+                            {% else %}
+                            <span class="status-badge status-cancelled">{{ tutor.status }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="action-group">
+                                <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-eye"></i></a>
+                                <a href="#" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <button class="btn btn-sm btn-outline-danger confirm-delete" data-message="Deactivate {{ tutor.name }}?">
+                                    <i class="fa-solid fa-user-slash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

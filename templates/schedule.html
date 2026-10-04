@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-section">
+    <div class="page-header">
+        <div>
+            <p class="section-label">Schedule</p>
+            <h3 class="section-heading">Daily and weekly timetable</h3>
+        </div>
+    </div>
+
+    <div class="schedule-toggle mb-4">
+        <button class="btn btn-primary btn-sm active">Daily</button>
+        <button class="btn btn-outline-secondary btn-sm">Weekly</button>
+    </div>
+
+    <div class="schedule-grid">
+        <article class="schedule-day panel">
+            <h4>Monday</h4>
+            <div class="schedule-slot">
+                <div class="slot-header">
+                    <strong>Ariana Smith</strong>
+                    <span class="status-badge status-booked">Booked</span>
+                </div>
+                <p>Mathematics</p>
+                <small>09:30 - 10:30</small>
+            </div>
+            <div class="schedule-slot">
+                <div class="slot-header">
+                    <strong>Liam Johnson</strong>
+                    <span class="status-badge status-completed">Completed</span>
+                </div>
+                <p>Biology</p>
+                <small>11:00 - 12:30</small>
+            </div>
+        </article>
+
+        <article class="schedule-day panel">
+            <h4>Tuesday</h4>
+            <div class="schedule-slot">
+                <div class="slot-header">
+                    <strong>Ariana Smith</strong>
+                    <span class="status-badge status-booked">Booked</span>
+                </div>
+                <p>Chemistry</p>
+                <small>10:00 - 11:15</small>
+            </div>
+        </article>
+
+        <article class="schedule-day panel">
+            <h4>Wednesday</h4>
+            <div class="schedule-slot">
+                <div class="slot-header">
+                    <strong>Sophie Nguyen</strong>
+                    <span class="status-badge status-cancelled">Cancelled</span>
+                </div>
+                <p>Physics</p>
+                <small>14:00 - 15:00</small>
+            </div>
+        </article>
+    </div>
+
+    <div class="panel mt-4">
+        <div class="panel-header">
+            <h4>Weekly overview</h4>
+        </div>
+        <div class="weekly-grid">
+            {% for session in sessions %}
+            <div class="weekly-card">
+                <div class="weekly-header">
+                    <strong>{{ session.student }}</strong>
+                    {% if session.status == 'Booked' %}
+                    <span class="status-badge status-booked">{{ session.status }}</span>
+                    {% elif session.status == 'Completed' %}
+                    <span class="status-badge status-completed">{{ session.status }}</span>
+                    {% else %}
+                    <span class="status-badge status-cancelled">{{ session.status }}</span>
+                    {% endif %}
+                </div>
+                <p>{{ session.subject }}</p>
+                <small>{{ session.tutor }}</small>
+                <small>{{ session.date }} • {{ session.time }} • {{ session.duration }} min</small>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

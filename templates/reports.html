@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-section">
+    <div class="page-header">
+        <div>
+            <p class="section-label">Reports</p>
+            <h3 class="section-heading">History and performance overview</h3>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <article class="stat-card">
+            <div class="stat-icon blue"><i class="fa-solid fa-user-check"></i></div>
+            <div>
+                <span class="stat-label">Completed sessions</span>
+                <strong class="stat-value">12</strong>
+            </div>
+        </article>
+        <article class="stat-card">
+            <div class="stat-icon green"><i class="fa-solid fa-calendar-check"></i></div>
+            <div>
+                <span class="stat-label">Booked this month</span>
+                <strong class="stat-value">28</strong>
+            </div>
+        </article>
+        <article class="stat-card">
+            <div class="stat-icon amber"><i class="fa-solid fa-ban"></i></div>
+            <div>
+                <span class="stat-label">Cancelled</span>
+                <strong class="stat-value">4</strong>
+            </div>
+        </article>
+    </div>
+
+    <div class="panel mt-4">
+        <div class="panel-header">
+            <h4>Student session history</h4>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Tutor</th>
+                        <th>Subject</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for session in sessions %}
+                    <tr>
+                        <td>{{ session.student }}</td>
+                        <td>{{ session.tutor }}</td>
+                        <td>{{ session.subject }}</td>
+                        <td>{{ session.date }}</td>
+                        <td>
+                            {% if session.status == 'Booked' %}
+                            <span class="status-badge status-booked">{{ session.status }}</span>
+                            {% elif session.status == 'Completed' %}
+                            <span class="status-badge status-completed">{{ session.status }}</span>
+                            {% else %}
+                            <span class="status-badge status-cancelled">{{ session.status }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

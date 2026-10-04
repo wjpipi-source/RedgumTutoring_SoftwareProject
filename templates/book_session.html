@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-section">
+    <div class="page-header">
+        <div>
+            <p class="section-label">Sessions</p>
+            <h3 class="section-heading">Book a tutoring session</h3>
+        </div>
+    </div>
+
+    <div class="alert alert-warning d-flex align-items-center gap-2" role="alert">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>Validation note: the session time must be fully covered by one selected tutor availability window.</span>
+    </div>
+
+    <div class="form-panel">
+        <form class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label" for="session-student">Student</label>
+                <select class="form-select" id="session-student">
+                    <option selected>Select student</option>
+                    {% for student in students %}
+                    <option>{{ student.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="session-tutor">Tutor</label>
+                <select class="form-select" id="session-tutor">
+                    <option selected>Select tutor</option>
+                    {% for tutor in tutors %}
+                    <option>{{ tutor.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="session-subject">Subject</label>
+                <input type="text" class="form-control" id="session-subject" placeholder="e.g. Mathematics">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="session-date">Date</label>
+                <input type="date" class="form-control" id="session-date">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="session-time">Start time</label>
+                <input type="time" class="form-control" id="session-time">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="session-duration">Duration (minutes)</label>
+                <input type="number" class="form-control" id="session-duration" min="30" step="15" value="60">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="session-status">Status</label>
+                <select class="form-select" id="session-status">
+                    <option selected>Booked</option>
+                    <option>Cancelled</option>
+                    <option>Completed</option>
+                </select>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label" for="session-notes">Session notes</label>
+                <textarea class="form-control" id="session-notes" rows="4" placeholder="Optional notes for the tutor or staff team"></textarea>
+            </div>
+
+            <div class="col-12 form-actions">
+                <a href="{{ url_for('sessions') }}" class="btn btn-outline-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Confirm booking</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

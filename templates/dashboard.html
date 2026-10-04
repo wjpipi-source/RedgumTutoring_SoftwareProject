@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-section">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+        <div>
+            <p class="section-label">Overview</p>
+            <h3 class="section-heading">Tutoring operations dashboard</h3>
+        </div>
+        <button class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i>
+            Add Student
+        </button>
+    </div>
+
+    <div class="stats-grid">
+        <article class="stat-card">
+            <div class="stat-icon blue"><i class="fa-solid fa-user-graduate"></i></div>
+            <div>
+                <span class="stat-label">Total Students</span>
+                <strong class="stat-value">{{ summary.total_students }}</strong>
+            </div>
+        </article>
+
+        <article class="stat-card">
+            <div class="stat-icon green"><i class="fa-solid fa-chalkboard-user"></i></div>
+            <div>
+                <span class="stat-label">Active Tutors</span>
+                <strong class="stat-value">{{ summary.active_tutors }}</strong>
+            </div>
+        </article>
+
+        <article class="stat-card">
+            <div class="stat-icon amber"><i class="fa-solid fa-calendar-day"></i></div>
+            <div>
+                <span class="stat-label">Today's Sessions</span>
+                <strong class="stat-value">{{ summary.todays_sessions }}</strong>
+            </div>
+        </article>
+
+        <article class="stat-card">
+            <div class="stat-icon violet"><i class="fa-solid fa-clock"></i></div>
+            <div>
+                <span class="stat-label">Upcoming Sessions</span>
+                <strong class="stat-value">{{ summary.upcoming_sessions }}</strong>
+            </div>
+        </article>
+    </div>
+
+    <div class="dashboard-grid">
+        <section class="panel panel-large">
+            <div class="panel-header">
+                <h4>Today's upcoming sessions</h4>
+                <a href="{{ url_for('sessions') }}" class="text-link">View all</a>
+            </div>
+
+            <div class="list-stack">
+                {% for session in upcoming_sessions[:4] %}
+                <div class="session-row">
+                    <div class="session-meta">
+                        <strong>{{ session.student }}</strong>
+                        <span>{{ session.subject }} with {{ session.tutor }}</span>
+                    </div>
+                    <div class="session-meta align-right">
+                        <span>{{ session.time }}</span>
+                        <small>{{ session.duration }} min</small>
+                    </div>
+                    <span class="status-badge status-booked">{{ session.status }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <h4>Quick actions</h4>
+            </div>
+            <div class="quick-actions">
+                <a href="{{ url_for('add_student') }}" class="action-button">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Add Student</span>
+                </a>
+                <a href="{{ url_for('add_tutor') }}" class="action-button">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Add Tutor</span>
+                </a>
+                <a href="{{ url_for('book_session') }}" class="action-button">
+                    <i class="fa-solid fa-square-plus"></i>
+                    <span>Book Session</span>
+                </a>
+                <a href="{{ url_for('schedule') }}" class="action-button">
+                    <i class="fa-solid fa-calendar-week"></i>
+                    <span>View Schedule</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <h4>Recent activity</h4>
+            </div>
+            <div class="activity-list">
+                {% for item in recent_activity %}
+                <div class="activity-item">
+                    <div class="activity-dot"></div>
+                    <div>
+                        <strong>{{ item.title }}</strong>
+                        <p>{{ item.detail }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</section>
+{% endblock %}

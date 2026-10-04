@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-section">
+    <div class="page-header">
+        <div>
+            <p class="section-label">Availability</p>
+            <h3 class="section-heading">Tutor availability windows</h3>
+        </div>
+        <button class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i>
+            Add availability
+        </button>
+    </div>
+
+    <div class="alert alert-info d-flex align-items-center gap-2" role="alert">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>Business rule: a session must fit entirely within a tutor's selected availability window.</span>
+    </div>
+
+    <div class="panel form-panel">
+        <form class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label" for="availability-tutor">Tutor</label>
+                <select class="form-select" id="availability-tutor">
+                    <option selected>Select tutor</option>
+                    {% for tutor in tutors %}
+                    <option>{{ tutor.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" for="availability-day">Day</label>
+                <select class="form-select" id="availability-day">
+                    <option selected>Monday</option>
+                    <option>Tuesday</option>
+                    <option>Wednesday</option>
+                    <option>Thursday</option>
+                    <option>Friday</option>
+                    <option>Saturday</option>
+                    <option>Sunday</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label" for="start-time">Start time</label>
+                <input type="time" class="form-control" id="start-time" value="09:00">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label" for="end-time">End time</label>
+                <input type="time" class="form-control" id="end-time" value="12:00">
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary w-100">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="panel mt-4">
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Tutor</th>
+                        <th>Day</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in availability_windows %}
+                    <tr>
+                        <td>{{ item.tutor }}</td>
+                        <td>{{ item.day }}</td>
+                        <td>{{ item.start }}</td>
+                        <td>{{ item.end }}</td>
+                        <td>
+                            <div class="action-group">
+                                <button class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-pen"></i></button>
+                                <button class="btn btn-sm btn-outline-danger confirm-delete" data-message="Delete availability for {{ item.tutor }}?">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}
