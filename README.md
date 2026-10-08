@@ -86,10 +86,10 @@ run.bat
 - /reports — summary reports and session history
 
 ## Demo Data
-The current version uses sample in-memory data to simulate real application behaviour. This allows the UI and routes to be tested before connecting to a persistent database such as SQLite.
+The current version uses sample in-memory data to simulate real application behaviour. This allows the UI and routes to be tested before connecting to a persistent database such as MySQL.
 
 ## Future Enhancements
-- Connect to SQLite or PostgreSQL
+- Connect to MySQL
 - Add CRUD functionality for students, tutors, and sessions
 - Add authentication and role-based access
 - Implement validation and form submission handling
