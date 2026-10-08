@@ -96,4 +96,4 @@ The current version uses sample in-memory data to simulate real application beha
 - Improve reporting and filtering features
 
 ## License
-This project is for educational use as part of the ISYS3001 Software Build Project.
+This project is for educational use as part of the ISYS3001 Software Build and Management Project.
